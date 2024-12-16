@@ -8,8 +8,8 @@
 - afterwards, we update current matrix with filled mines.
 
 # Requirements
-- Ruby `3.1.0`
-- Node `20.10.0`
+- Ruby version `3.1.0`
+- Node version `20.10.0`
 
 # Setup
 Commands to run in order:
@@ -25,3 +25,6 @@ Command: `bin/dev`
 Commands:
 - `bin/rails assets:precompile`
 - `bin/rails s`
+
+# Test cases:
+- Run `rspec` to run test cases.
