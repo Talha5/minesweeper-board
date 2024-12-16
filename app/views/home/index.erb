@@ -1,1 +1,76 @@
-<h1>Minesweeper Board</h1>
+<div class="p-5">
+  <h1 class="text-2xl font-bold mb-6">New Board</h1>
+
+  <%= form_with model: @board, local: true, class: "space-y-4" do |form| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex flex-col space-y-2">
+        <%= form.label :name, class: "font-medium text-gray-700" %>
+        <%= form.text_field :name, class: "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :email, class: "font-medium text-gray-700" %>
+        <%= form.email_field :email, class: "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :width, class: "font-medium text-gray-700" %>
+        <%= form.number_field :width, class: "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :height, class: "font-medium text-gray-700" %>
+        <%= form.number_field :height, class: "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+      </div>
+
+      <div class="flex flex-col space-y-2 md:col-span-2">
+        <%= form.label :mines_count, class: "font-medium text-gray-700" %>
+        <%= form.number_field :mines_count, class: "border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none" %>
+      </div>
+    </div>
+
+    <div>
+      <%= form.submit "Generate Board", class: "bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer" %>
+    </div>
+  <% end %>
+
+  <div class="mt-10">
+    <h2 class="text-xl font-semibold mb-4">Recent 10 Boards</h2>
+    <table class="w-full border-collapse border border-gray-200 text-left">
+      <thead class="bg-gray-100">
+      <tr>
+        <th class="border border-gray-300 px-4 py-2">Name</th>
+        <th class="border border-gray-300 px-4 py-2">Email</th>
+        <th class="border border-gray-300 px-4 py-2">Created At</th>
+        <th class="border border-gray-300 px-4 py-2">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @recent_boards&.each do |board| %>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 px-4 py-2"><%= link_to board.name, board, class: "text-blue-500 hover:underline" %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= board.email %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= board.created_at.strftime("%d %b %y %H:%M:%S") %></td>
+          <td class="border border-gray-300 px-4 py-2"><%= link_to 'View', board, class: "text-blue-500 hover:underline" %></td>
+        </tr>
+      <% end %>
+      <%- if @recent_boards.blank? %>
+        <tr class="hover:bg-gray-50">
+          <td class="border border-gray-300 px-4 py-4 text-center" colspan="4">No Board Found</td>
+        </tr>
+      <% end %>
+      </tbody>
+      <tfoot class="bg-gray-100">
+      <tr>
+        <th class="border border-gray-300 px-4 py-2">Name</th>
+        <th class="border border-gray-300 px-4 py-2">Email</th>
+        <th class="border border-gray-300 px-4 py-2">Created At</th>
+        <th class="border border-gray-300 px-4 py-2">Action</th>
+      </tr>
+      </tfoot>
+    </table>
+    <div class="mt-4 text-center">
+      <%= link_to 'View all boards', boards_path, class: "bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    </div>
+  </div>
+</div>
