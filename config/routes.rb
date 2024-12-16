@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
 
-  resources :boards, only: [:create]
+  resources :boards, only: [:create, :show, :index]
 end
