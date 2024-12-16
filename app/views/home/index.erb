@@ -35,39 +35,7 @@
 
 <div class="mt-10">
   <h2 class="text-xl font-semibold mb-4">Recent 10 Boards</h2>
-  <table class="w-full border-collapse border border-gray-200 text-left">
-    <thead class="bg-gray-100">
-    <tr>
-      <th class="border border-gray-300 px-4 py-2">Name</th>
-      <th class="border border-gray-300 px-4 py-2">Email</th>
-      <th class="border border-gray-300 px-4 py-2">Created At</th>
-      <th class="border border-gray-300 px-4 py-2">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @recent_boards&.each do |board| %>
-      <tr class="hover:bg-gray-50">
-        <td class="border border-gray-300 px-4 py-2"><%= link_to board.name, board, class: "text-blue-500 hover:underline" %></td>
-        <td class="border border-gray-300 px-4 py-2"><%= board.email %></td>
-        <td class="border border-gray-300 px-4 py-2"><%= board.created_at.strftime("%d %b %y %H:%M:%S") %></td>
-        <td class="border border-gray-300 px-4 py-2"><%= link_to 'View', board, class: "text-blue-500 hover:underline" %></td>
-      </tr>
-    <% end %>
-    <%- if @recent_boards.blank? %>
-      <tr class="hover:bg-gray-50">
-        <td class="border border-gray-300 px-4 py-4 text-center" colspan="4">No Board Found</td>
-      </tr>
-    <% end %>
-    </tbody>
-    <tfoot class="bg-gray-100">
-    <tr>
-      <th class="border border-gray-300 px-4 py-2">Name</th>
-      <th class="border border-gray-300 px-4 py-2">Email</th>
-      <th class="border border-gray-300 px-4 py-2">Created At</th>
-      <th class="border border-gray-300 px-4 py-2">Action</th>
-    </tr>
-    </tfoot>
-  </table>
+  <%= render partial: 'boards/data', locals: { data: @recent_boards, minimal: true } %>
   <div class="mt-4 text-center">
     <%= link_to 'View all boards', boards_path, class: "bg-blue-500 text-white font-medium py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>

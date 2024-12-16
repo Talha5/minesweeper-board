@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class BoardsController < ApplicationController
+  before_action :set_board, only: [:show]
+
+  def index
+    @boards = Board.recent
+  end
 
   def create
     ActiveRecord::Base.transaction do
@@ -22,7 +27,20 @@ class BoardsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def show
+    board_service = BoardService.new
+
+    @board_matrix = board_service.get_matrix @board
+  end
+
   private
+
+  def set_board
+    @board = Board.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = "Board not found"
+    redirect_back(fallback_location: root_path)
+  end
 
   def board_params
     params.require(:board).permit(:name, :email, :width, :height, :mines_count)

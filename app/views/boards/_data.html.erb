@@ -1,0 +1,45 @@
+<table class="w-full border-collapse border border-gray-200 text-left">
+  <thead class="bg-gray-100">
+  <tr>
+    <th class="border border-gray-300 px-4 py-2">Name</th>
+    <th class="border border-gray-300 px-4 py-2">Email</th>
+    <%- unless minimal %>
+      <th class="border border-gray-300 px-4 py-2">Dimension</th>
+      <th class="border border-gray-300 px-4 py-2">Mines</th>
+    <% end %>
+    <th class="border border-gray-300 px-4 py-2">Created At</th>
+    <th class="border border-gray-300 px-4 py-2">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% data&.each do |board| %>
+    <tr class="hover:bg-gray-50">
+      <td class="border border-gray-300 px-4 py-2"><%= link_to board.name, board, class: "text-blue-500 hover:underline" %></td>
+      <td class="border border-gray-300 px-4 py-2"><%= board.email %></td>
+      <%- unless minimal %>
+        <td class="border border-gray-300 px-4 py-2"><%= board.width %> x <%= board.height %></td>
+        <td class="border border-gray-300 px-4 py-2"><%= board.board_mines.count %></td>
+      <% end %>
+      <td class="border border-gray-300 px-4 py-2"><%= board.created_at.strftime("%d %b %y %H:%M:%S") %></td>
+      <td class="border border-gray-300 px-4 py-2"><%= link_to 'View', board, class: "text-blue-500 hover:underline" %></td>
+    </tr>
+  <% end %>
+  <%- if data.blank? %>
+    <tr class="hover:bg-gray-50">
+      <td class="border border-gray-300 px-4 py-4 text-center" colspan="4">No Board Found</td>
+    </tr>
+  <% end %>
+  </tbody>
+  <tfoot class="bg-gray-100">
+  <tr>
+    <th class="border border-gray-300 px-4 py-2">Name</th>
+    <th class="border border-gray-300 px-4 py-2">Email</th>
+    <%- unless minimal %>
+      <th class="border border-gray-300 px-4 py-2">Dimension</th>
+      <th class="border border-gray-300 px-4 py-2">Mines</th>
+    <% end %>
+    <th class="border border-gray-300 px-4 py-2">Created At</th>
+    <th class="border border-gray-300 px-4 py-2">Action</th>
+  </tr>
+  </tfoot>
+</table>

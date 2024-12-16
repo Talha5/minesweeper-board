@@ -1,0 +1,36 @@
+<div class="p-6 bg-gray-50 min-h-screen">
+  <div class="mb-4">
+    <%= link_to '< View all boards', boards_path, class: "text-blue-600 hover:underline" %>
+  </div>
+
+  <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+    <h1 class="text-xl font-bold text-gray-800 mb-2">Board: <%= @board.name %></h1>
+    <h3 class="text-sm text-gray-600 mb-1"><strong>Email:</strong> <%= @board.email %></h3>
+    <h3 class="text-sm text-gray-600 mb-1"><strong>Dimensions:</strong> <%= @board.height %> x <%= @board.width %></h3>
+    <h3 class="text-sm text-gray-600 mb-1"><strong>Cells:</strong> <%= @board.height * @board.width %></h3>
+    <h3 class="text-sm text-gray-600 mb-1"><strong>Mines:</strong> <%= @board.board_mines.count %></h3>
+    <h3 class="text-sm text-gray-600"><strong>Created At:</strong> <%= @board.created_at.strftime("%d %b %y %H:%M:%S") %></h3>
+  </div>
+
+  <div class="board-table overflow-x-auto bg-white shadow-md rounded-lg p-6 w-full">
+    <table>
+      <tbody>
+      <% @board_matrix.each do |row| %>
+        <tr>
+          <% row.each do |col| %>
+            <td>
+              <% if col == 1 %>
+                <div class="flex justify-center items-center w-[25px] h-[25px] text-xl">
+                  <i class="fa-solid fa-bomb"></i>
+                </div>
+              <% else %>
+                <div class="bg-gray-300 w-[25px] h-[25px]"></div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
