@@ -5,5 +5,40 @@
 
   <h2 class="text-2xl font-semibold text-gray-800">All Boards</h2>
 
+  <div class="mb-4">
+    <%= form_with(url: boards_path, method: :get, local: true, class: "space-y-4") do %>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div>
+          <%= label_tag :name, "Name", class: "block text-gray-700" %>
+          <%= text_field_tag :name, params[:name], class: "w-full p-2 border border-gray-300 rounded" %>
+        </div>
+        <div>
+          <%= label_tag :email, "Email", class: "block text-gray-700" %>
+          <%= text_field_tag :email, params[:email], class: "w-full p-2 border border-gray-300 rounded" %>
+        </div>
+        <div>
+          <%= label_tag :width, "Width", class: "block text-gray-700" %>
+          <%= number_field_tag :width, params[:width], class: "w-full p-2 border border-gray-300 rounded" %>
+        </div>
+        <div>
+          <%= label_tag :height, "Height", class: "block text-gray-700" %>
+          <%= number_field_tag :height, params[:height], class: "w-full p-2 border border-gray-300 rounded" %>
+        </div>
+        <div>
+          <%= label_tag :mines_count, "Mines", class: "block text-gray-700" %>
+          <%= number_field_tag :mines_count, params[:mines_count], class: "w-full p-2 border border-gray-300 rounded" %>
+        </div>
+      </div>
+      <div class="mt-4">
+        <%= submit_tag "Filter", class: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 cursor-pointer" %>
+        <%= link_to "Clear Filters", boards_path, class: "ml-4 text-gray-600 hover:underline" %>
+      </div>
+    <% end %>
+  </div>
+
   <%= render partial: 'boards/data', locals: { data: @boards, minimal: false } %>
+
+  <div class="mt-6">
+    <%= paginate @boards %>
+  </div>
 </div>

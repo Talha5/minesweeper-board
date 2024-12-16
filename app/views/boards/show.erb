@@ -12,7 +12,7 @@
     <h3 class="text-sm text-gray-600"><strong>Created At:</strong> <%= @board.created_at.strftime("%d %b %y %H:%M:%S") %></h3>
   </div>
 
-  <div class="board-table overflow-x-auto bg-white shadow-md rounded-lg p-6 w-full">
+  <div class="overflow-x-auto bg-white shadow-md rounded-lg p-6 w-full max-h-[600px]">
     <table>
       <tbody>
       <% @board_matrix.each do |row| %>

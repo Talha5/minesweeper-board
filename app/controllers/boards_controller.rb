@@ -5,6 +5,9 @@ class BoardsController < ApplicationController
 
   def index
     @boards = Board.recent
+                   .filter_by_params(params)
+                   .page(params[:page])
+                   .per(10)
   end
 
   def create
@@ -21,7 +24,7 @@ class BoardsController < ApplicationController
     end
 
     flash[:notice] = 'Board Created'
-    redirect_back(fallback_location: root_path)
+    redirect_to board_path @board.id
   rescue StandardError => e
     flash[:error] = "Board creation failed: #{e.message}"
     redirect_back(fallback_location: root_path)
